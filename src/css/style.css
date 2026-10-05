@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "Kumbh Sans"; font-style: normal; font-weight: 300 900; font-display: swap;
+  src: url(/fonts/kumbh-sans-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Ersatzschrift mit Kumbh-Sans-Maßen: verhindert Springen beim Nachladen der Schrift */
+@font-face {
+  font-family: "Kumbh Fallback"; font-weight: 300 550;
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Helvetica");
+  size-adjust: 104.5%; ascent-override: 95%; descent-override: 24%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Kumbh Fallback"; font-weight: 551 900;
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("Helvetica Bold");
+  size-adjust: 99.7%; ascent-override: 99%; descent-override: 25%; line-gap-override: 0%;
+}
+
 /* ==========================================================================
    Gastro Einkaufsgemeinschaft — Redesign
    Warm-Editorial: Creme-Papier, Küchen-Anthrazit, Orange & Grün aus der CI
@@ -16,11 +34,13 @@
   --cream-2: #ece5d8;
   --white: #fffdf9;
   --text: #4f4a43;
-  --muted: #8a8378;
+  --muted: #6b645a;
+  --orange-ink: #B87800;
+  --green-ink: #5F8A12;
   --line: rgba(21, 18, 14, .12);
   --line-l: rgba(255, 253, 249, .14);
 
-  --font: "Kumbh Sans", system-ui, sans-serif;
+  --font: "Kumbh Sans", "Kumbh Fallback", system-ui, sans-serif;
   --r-lg: clamp(20px, 2.4vw, 34px);
   --r-md: 18px;
   --gutter: clamp(16px, 4vw, 48px);
@@ -68,7 +88,7 @@ address { font-style: normal; }
 .h2 { font-size: clamp(30px, 3.6vw, 50px); }
 .h2--xl { font-size: clamp(44px, 7vw, 104px); letter-spacing: -.04em; line-height: .95; }
 .lead { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; color: var(--ink-3); }
-.hl-green { color: var(--green); }
+.hl-green { color: var(--green-ink); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -161,12 +181,12 @@ address { font-style: normal; }
 }
 .hero__media, .hero__shade { position: absolute; inset: 0; z-index: -1; }
 .hero__img {
-  position: absolute; inset: 0; background-size: cover; background-position: 70% 30%;
-  opacity: 0; animation: heroFade 14s infinite, heroZoom 14s infinite;
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%;
+  animation: heroZoom 14s ease-in-out infinite alternate;
 }
-.hero__img:nth-child(2) { animation-delay: 7s; }
-@keyframes heroFade { 0%{opacity:0} 6%{opacity:1} 50%{opacity:1} 56%{opacity:0} 100%{opacity:0} }
-@keyframes heroZoom { 0%{transform:scale(1.12)} 56%{transform:scale(1)} 100%{transform:scale(1)} }
+.hero__img--b { opacity: 0; animation: heroFade 14s infinite, heroZoom 14s ease-in-out infinite alternate; }
+@keyframes heroFade { 0%{opacity:0} 44%{opacity:0} 50%{opacity:1} 94%{opacity:1} 100%{opacity:0} }
+@keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.08)} }
 .hero__shade {
   background:
     linear-gradient(90deg, rgba(21,18,14,.92) 0%, rgba(21,18,14,.65) 38%, rgba(21,18,14,.1) 75%),
@@ -270,8 +290,8 @@ address { font-style: normal; }
 }
 .facts li { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .facts__k { font-size: clamp(44px, 5vw, 76px); font-weight: 800; letter-spacing: -.05em; line-height: 1; color: var(--ink); }
-.facts li:nth-child(1) .facts__k { color: var(--orange); }
-.facts li:nth-child(3) .facts__k { color: var(--green); }
+.facts li:nth-child(1) .facts__k { color: var(--orange-ink); }
+.facts li:nth-child(3) .facts__k { color: var(--green-ink); }
 .facts__l { font-size: 18px; font-weight: 600; color: var(--ink-3); }
 .facts__img {
   position: relative; margin-top: 26px;
@@ -326,8 +346,8 @@ address { font-style: normal; }
 .adv__step .h2 { margin-bottom: 22px; }
 .adv__step .lead { margin-bottom: 18px; }
 .adv__step p:not(.lead) { font-size: 16px; }
-.adv__no { font-size: clamp(56px, 6vw, 92px); font-weight: 800; color: var(--orange); letter-spacing: -.05em; line-height: 1; display: block; margin-bottom: 16px; }
-.adv__step:nth-child(2) .adv__no { color: var(--green); }
+.adv__no { font-size: clamp(56px, 6vw, 92px); font-weight: 800; color: var(--orange-ink); letter-spacing: -.05em; line-height: 1; display: block; margin-bottom: 16px; }
+.adv__step:nth-child(2) .adv__no { color: var(--green-ink); }
 .adv__mimg { display: none; }
 .adv__dots { grid-area: 2 / 1; display: flex; gap: 8px; margin-top: clamp(24px, 4vh, 44px); }
 .adv__dots button {
@@ -405,7 +425,8 @@ address { font-style: normal; }
 .acc__btn:hover .acc__icon { border-color: var(--ink); }
 .acc.is-open .acc__icon { background: var(--orange); border-color: var(--orange); transform: rotate(180deg); }
 .acc.is-open .acc__icon::after { transform: rotate(0); }
-.acc.is-open .acc__no { color: var(--orange); }
+.acc__no { justify-self: start; padding: 3px 9px; border-radius: 999px; transition: color .3s, background .3s; }
+.acc.is-open .acc__no { color: var(--ink); background: var(--orange); }
 .acc__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s var(--ease); }
 .acc.is-open .acc__panel { grid-template-rows: 1fr; }
 .acc__inner { overflow: hidden; padding-left: 68px; }
@@ -462,7 +483,8 @@ address { font-style: normal; }
 .ftr__logo { display: block; background: var(--ink); padding: 18px 26px; border-radius: 20px; }
 .ftr__logo img { height: 56px; width: auto; }
 .ftr__mid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; padding: 44px 0; }
-.ftr h4 { font-size: 17px; margin-bottom: 10px; letter-spacing: -.01em; }
+.ftr__h { color: var(--ink); font-weight: 700; }
+.ftr h4, .ftr__h { font-size: 17px; margin-bottom: 10px; letter-spacing: -.01em; }
 .ftr__tel { font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -.02em; }
 .ftr__tel:hover { color: var(--orange); }
 .ftr__nav { display: grid; gap: 6px; justify-items: start; }
@@ -474,8 +496,8 @@ address { font-style: normal; }
 /* ==========================================================================
    Reveal-Animationen
    ========================================================================== */
-[data-rise] { opacity: 0; transform: translateY(30px); animation: rise 1s var(--ease) forwards; animation-delay: calc(.15s + var(--d, 0s)); }
-@keyframes rise { to { opacity: 1; transform: none; } }
+[data-rise] { animation: rise .9s var(--ease) backwards; animation-delay: var(--d, 0s); }
+@keyframes rise { from { transform: translateY(24px); } }
 .js [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease), transform 1s var(--ease); transition-delay: var(--d, 0s); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
@@ -497,6 +519,7 @@ address { font-style: normal; }
   .hdr.is-scrolled .hdr__logo img { height: 46px; }
   .hero__stamp { width: 110px; right: 18px; top: 96px; }
   .hero__title { max-width: none; font-size: 8.4vw; }
+  .hero__img { object-position: 50% 30%; }
   .hero__shade { background: linear-gradient(0deg, rgba(21,18,14,.97) 0%, rgba(21,18,14,.75) 55%, rgba(21,18,14,.35) 100%); }
   .intro__grid, .contact__grid, .serv__grid { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr; gap: 56px; }
@@ -543,6 +566,5 @@ address { font-style: normal; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  .hero__img:first-child { opacity: 1; }
   .logos__track { animation: none; }
 }

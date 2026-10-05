@@ -142,6 +142,35 @@
     if (!reduced) timer = requestAnimationFrame(loop);
   }
 
+  /* ---------- Logo-Band: Kopie für die Endlos-Schleife (statt doppelt im HTML) ---------- */
+  $$("[data-marquee]").forEach((track) => {
+    [...track.children].forEach((tile) => {
+      const copy = tile.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      track.appendChild(copy);
+    });
+  });
+
+  /* ---------- Bilder verzögert laden (schnellerer erster Seitenaufbau) ---------- */
+  // Video-Vorschaubilder erst kurz bevor sie sichtbar werden
+  const posterIO = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      en.target.poster = en.target.dataset.poster;
+      posterIO.unobserve(en.target);
+    });
+  }, { rootMargin: "400px 0px" });
+  $$("video[data-poster]").forEach((v) => posterIO.observe(v));
+  // zweites Hero-Bild erst nach dem vollständigen Laden der Seite
+  const loadDeferred = () => $$("[data-defer]").forEach((img) => {
+    const src = img.parentElement.querySelector("source[data-srcset]");
+    if (src) src.srcset = src.dataset.srcset;
+    img.srcset = img.dataset.srcset;
+    img.src = img.dataset.src;
+  });
+  if (document.readyState === "complete") setTimeout(loadDeferred, 1500);
+  else addEventListener("load", () => setTimeout(loadDeferred, 1500));
+
   /* ---------- Videos: nur eins gleichzeitig ---------- */
   const players = [];
   const bindPlayer = (wrap) => {
