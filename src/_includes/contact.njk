@@ -1,0 +1,35 @@
+<!-- ============ KONTAKT ============ -->
+<section class="contact" id="kontakt">
+  <div class="wrap contact__grid">
+    <div class="contact__info" data-reveal>
+      <p class="eyebrow"><span class="dot"></span>Kontakt</p>
+      <h2 class="h2 h2--xl">Gastro Einkaufs&shy;gemeinschaft</h2>
+      <address>
+        Osterhofener Str. 12<br>
+        93055 Regensburg
+      </address>
+      <a href="tel:{{ site.phone }}" class="contact__tel">{{ site.phoneLabel }}</a>
+      <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+
+    {# ─────────────────────────────────────────────────────────────────────
+       Das Kontaktformular kommt aus cms5 (Mandant "gastroekg", Kürzel
+       "kontakt"): Felder, Pflichtangaben, Spam-Schutz, Turnstile und
+       Mailversand werden dort gepflegt. Hier steht nur der Platzhalter;
+       src/js/cms5-forms.js holt das Markup und verdrahtet das Absenden.
+       Also KEIN eigenes <form> mehr einbauen – fehlende Felder gehören ins
+       Backend. Aussehen: src/css/style.css, Abschnitt "cms5-Formular".
+       Endpoint: src/_data/site.json (kontakt.endpoint), lokal überschreibbar
+       per GASTROEKG_FORMS_BASE / GASTROEKG_KONTAKT_ENDPOINT (src/_data/env.js).
+       ───────────────────────────────────────────────────────────────────── #}
+    <div class="form" data-reveal style="--d:.1s">
+      <div data-cms5-form-src="{{ env.kontaktEndpoint or site.kontakt.endpoint }}"
+           {% if not env.kontaktEndpoint %}data-cms5-form-fallback="{{ site.cms5.fallbackBase }}{{ site.kontakt.endpoint }}"
+           {% endif %}data-cms5-success-class="form__ok"></div>
+      <noscript>
+        <p class="form__note">Für das Formular wird JavaScript benötigt. Rufen Sie uns gerne an: <a href="tel:{{ site.phone }}">{{ site.phoneLabel }}</a> oder schreiben Sie an <a href="mailto:info@gastro-einkaufsgemeinschaft.de">info@gastro-einkaufsgemeinschaft.de</a>.</p>
+      </noscript>
+      <p class="form__note">Bitte beachten Sie unsere <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
+    </div>
+  </div>
+</section>

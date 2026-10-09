@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="theme-color" content="#14110d">
+  <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+{% if hero %}
+  <link rel="preload" as="image" href="/images/hero/hero-1-m.webp" media="(max-width: 860px)" fetchpriority="high">
+  <link rel="preload" as="image" imagesrcset="/images/hero/hero-1-1200.webp 1200w, /images/hero/hero-1-1700.webp 1700w, /images/hero/hero-1-2200.webp 2200w" imagesizes="100vw" media="(min-width: 861px)" fetchpriority="high">
+{% endif %}
+  <style>{% inlineCss "src/css/style.css" %}</style>
+</head>
+<body>
+
+<a class="skip" href="#content">Zum Inhalt springen</a>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" data-hdr>
+  <div class="hdr__bar">
+    <a href="/" class="hdr__logo" aria-label="Gastro Einkaufsgemeinschaft – Startseite">
+      <img src="/images/logo-white-280.webp" srcset="/images/logo-white-280.webp 280w, /images/logo-white.webp 440w" sizes="(max-width: 860px) 154px, 216px" alt="Gastro Einkaufsgemeinschaft" width="500" height="208">
+    </a>
+    <nav class="hdr__nav" aria-label="Hauptnavigation">
+      <a href="/#ueber-uns">Über uns</a>
+      <a href="/#vorteile">Vorteile</a>
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/#kontakt">Kontakt</a>
+    </nav>
+    <a href="{{ site.funnel }}" class="btn btn--orange btn--sm hdr__cta">Potenzialanalyse <span class="btn__arrow" aria-hidden="true">→</span></a>
+    <button class="hdr__burger" aria-label="Menü öffnen" aria-expanded="false" data-burger><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav aria-label="Mobile Navigation">
+    <a href="/#ueber-uns"><small>01</small>Über uns</a>
+    <a href="/#vorteile"><small>02</small>Vorteile</a>
+    <a href="/#leistungen"><small>03</small>Leistungen</a>
+    <a href="/#kontakt"><small>04</small>Kontakt</a>
+  </nav>
+  <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren</a>
+  <a href="tel:{{ site.phone }}" class="mnav__tel">{{ site.phoneLabel }}</a>
+</div>
+
+<main id="content">
+{{ content | safe }}
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <a href="/" class="ftr__logo"><img src="/images/logo-white.webp" alt="Gastro Einkaufsgemeinschaft" width="500" height="208" loading="lazy"></a>
+      <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="ftr__mid">
+      <div>
+        <p class="ftr__h">Gastro Einkaufsgemeinschaft</p>
+        <p>Osterhofener Str. 12<br>93055 Regensburg</p>
+      </div>
+      <div>
+        <a href="tel:{{ site.phone }}" class="ftr__tel">{{ site.phoneLabel }}</a>
+      </div>
+      <nav class="ftr__nav" aria-label="Footer">
+        <a href="/#ueber-uns">Über uns</a>
+        <a href="/#vorteile">Vorteile</a>
+        <a href="/#leistungen">Leistungen</a>
+        <a href="/#kontakt">Kontakt</a>
+      </nav>
+    </div>
+    <div class="ftr__bottom">
+      <div class="ftr__legal">
+        <a href="/impressum/">Impressum</a>
+        <a href="/datenschutz/">Datenschutz</a>
+      </div>
+      <a href="http://www.aranes.de" class="ftr__credit">Webdesign by ARANES GmbH &amp; Co. KG</a>
+    </div>
+  </div>
+</footer>
+
+<script>{% inlineJs "src/js/main.js" %}</script>
+<script>{% inlineJs "src/js/cms5-forms.js" %}</script>
+</body>
+</html>

@@ -454,26 +454,49 @@ address { font-style: normal; }
 .contact__tel:hover { color: var(--white); }
 .contact__info .btn { display: flex; width: fit-content; }
 
+/* ---------- cms5-Formular ----------
+   Das Markup kommt aus cms5 (cms5-form__*-Klassen aus RenderFormMarkup.php),
+   hier wird nur gestaltet. Klassen nicht umbenennen – das müsste im Backend
+   geschehen. Beschriftung steht als Label über dem Feld; der gleichlautende
+   Platzhalter wird deshalb ausgeblendet. */
 .form {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   background: rgba(255,253,249,.04); border: 1px solid rgba(255,253,249,.1);
   padding: clamp(20px, 3vw, 36px); border-radius: var(--r-lg);
 }
-.field { position: relative; }
-.field--full { grid-column: 1 / -1; }
-.field input, .field textarea {
-  width: 100%; padding: 28px 18px 10px; border-radius: 14px;
+.form [data-cms5-form-src] { min-height: 420px; }
+.form [data-cms5-state="ready"], .form [data-cms5-state="error"] { min-height: 0; }
+.cms5-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cms5-form__field { display: flex; flex-direction: column; gap: 8px; }
+.cms5-form__field--textarea, .form-field--full { grid-column: 1 / -1; }
+.cms5-form__field > label {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: rgba(255,253,249,.6);
+}
+.cms5-form__required { text-decoration: none; color: var(--orange); margin-left: 2px; }
+.cms5-form__field input, .cms5-form__field textarea, .cms5-form__field select {
+  width: 100%; padding: 15px 18px; border-radius: 14px;
   background: rgba(255,253,249,.06); border: 1px solid rgba(255,253,249,.12);
   color: var(--white); font: inherit; font-size: 16px; outline: none; resize: vertical;
   transition: border-color .25s, background .25s;
 }
-.field textarea { min-height: 140px; }
-.field label { position: absolute; left: 19px; top: 19px; color: rgba(255,253,249,.55); font-size: 16px; pointer-events: none; transition: transform .25s var(--ease), font-size .25s, color .25s, top .25s; }
-.field input:focus, .field textarea:focus { border-color: var(--green); background: rgba(255,253,249,.09); }
-.field input:focus + label, .field input:not(:placeholder-shown) + label,
-.field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 9px; font-size: 12px; color: var(--green); font-weight: 600; letter-spacing: .04em; }
-.form__submit { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
-.form__ok { grid-column: 1 / -1; color: var(--green); font-weight: 600; }
+.cms5-form__field input::placeholder, .cms5-form__field textarea::placeholder { color: transparent; }
+.cms5-form__field textarea { min-height: 140px; }
+.cms5-form__field input:focus, .cms5-form__field textarea:focus, .cms5-form__field select:focus { border-color: var(--green); background: rgba(255,253,249,.09); }
+.cms5-form__field[data-state="error"] input, .cms5-form__field[data-state="error"] textarea { border-color: var(--orange); }
+.cms5-form__field[data-state="error"] > label { color: var(--orange); }
+.cms5-form__turnstile { grid-column: 1 / -1; min-height: 0; }
+.cms5-form__turnstile:empty { display: none; }
+.cms5-form__actions { grid-column: 1 / -1; margin-top: 6px; }
+.cms5-form__submit { --bg: var(--green); --fg: var(--ink); box-shadow: 0 10px 30px -12px rgba(134,188,36,.7); }
+.cms5-form__submit:hover { --bg: #93c932; }
+.cms5-form__submit:disabled { opacity: .6; cursor: wait; transform: none; }
+.cms5-form__message { grid-column: 1 / -1; margin: 0; font-size: 15px; color: rgba(255,253,249,.75); }
+.cms5-form__message:empty { display: none; }
+.cms5-form__message[data-state="error"] { color: var(--orange); font-weight: 600; }
+.form__ok { color: var(--green); font-weight: 600; font-size: 18px; }
+.form__note { margin: 18px 0 0; font-size: 14px; color: rgba(255,253,249,.55); }
+.form__note a { color: rgba(255,253,249,.85); text-decoration: underline; text-underline-offset: 3px; }
+.form__note a:hover { color: var(--orange); }
 
 /* ==========================================================================
    FOOTER
@@ -492,6 +515,45 @@ address { font-style: normal; }
 .ftr__nav a:hover, .ftr__legal a:hover, .ftr__credit:hover { color: var(--ink); }
 .ftr__bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; }
 .ftr__legal { display: flex; gap: 22px; }
+
+/* ==========================================================================
+   UNTERSEITEN (Impressum, Datenschutz)
+   ========================================================================== */
+.page {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin: 6px 10px 0; border-radius: var(--r-lg);
+  background: var(--ink); color: var(--white);
+  padding: clamp(150px, 18vw, 230px) 0 clamp(50px, 6vw, 90px);
+}
+.page::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60% 80% at 100% 0%, rgba(247,167,18,.22), transparent 70%),
+    radial-gradient(40% 60% at 0% 100%, rgba(134,188,36,.14), transparent 70%);
+}
+.page__title {
+  color: var(--white); font-size: clamp(42px, 7vw, 104px);
+  letter-spacing: -.04em; line-height: .95; max-width: 14ch;
+}
+
+.legal { padding: clamp(60px, 8vw, 120px) 0 clamp(40px, 6vw, 90px); }
+.legal__body { max-width: 820px; }
+.legal__body h2 {
+  font-size: clamp(26px, 2.8vw, 38px); margin: 1.9em 0 .6em;
+  padding-top: 1em; border-top: 1px solid var(--line);
+}
+.legal__body h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.legal__body h3 { font-size: clamp(20px, 1.8vw, 24px); margin: 1.8em 0 .5em; }
+.legal__body h4 { font-size: 17px; margin: 1.4em 0 .4em; color: var(--ink-3); }
+.legal__body p { margin-bottom: 1.1em; }
+.legal__body p:last-child { margin-bottom: 0; }
+.legal__body strong { color: var(--ink); }
+.legal__body a {
+  color: var(--orange-ink); font-weight: 600; overflow-wrap: anywhere;
+  text-decoration: underline; text-decoration-color: rgba(184,120,0,.35); text-underline-offset: 3px;
+  transition: color .2s, text-decoration-color .2s;
+}
+.legal__body a:hover { color: var(--ink); text-decoration-color: var(--orange); }
 
 /* ==========================================================================
    Reveal-Animationen
@@ -540,6 +602,7 @@ address { font-style: normal; }
   .sort__nav { justify-content: space-between; }
 
   .voices, .contact { margin: 0 6px; }
+  .page { margin: 6px 6px 0; }
   .voices__grid { grid-template-columns: repeat(2, 1fr); }
 
   .serv__img { position: relative; top: 0; aspect-ratio: 16/10; order: -1; }
@@ -547,8 +610,8 @@ address { font-style: normal; }
   .acc__icon { width: 40px; height: 40px; }
   .acc__inner { padding-left: 0; }
 
-  .form { grid-template-columns: 1fr; }
-  .form__submit { justify-self: stretch; }
+  .cms5-form { grid-template-columns: 1fr; }
+  .cms5-form__submit { width: 100%; }
   .contact__info .btn, .ftr__top .btn { width: 100%; }
   .ftr__mid { grid-template-columns: 1fr; }
 }

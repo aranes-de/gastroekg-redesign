@@ -1,54 +1,9 @@
 ---
+layout: base.njk
 title: "Gastro Einkaufsgemeinschaft – Ihr starker Partner für den Gastronomieeinkauf"
+description: "Mit unserer Einkaufsgemeinschaft sparen Sie garantiert 5 Prozent. Hohe Rückvergütungen ohne versteckte Gebühren – seit 2006."
+hero: true
 ---
-<!doctype html>
-<html lang="de">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }}</title>
-  <meta name="description" content="Mit unserer Einkaufsgemeinschaft sparen Sie garantiert 5 Prozent. Hohe Rückvergütungen ohne versteckte Gebühren – seit 2006.">
-  <meta name="theme-color" content="#14110d">
-  <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/images/favicon-180.png">
-  <link rel="preload" as="image" href="/images/hero/hero-1-m.webp" media="(max-width: 860px)" fetchpriority="high">
-  <link rel="preload" as="image" imagesrcset="/images/hero/hero-1-1200.webp 1200w, /images/hero/hero-1-1700.webp 1700w, /images/hero/hero-1-2200.webp 2200w" imagesizes="100vw" media="(min-width: 861px)" fetchpriority="high">
-  <style>{% inlineCss "src/css/style.css" %}</style>
-</head>
-<body>
-
-<a class="skip" href="#content">Zum Inhalt springen</a>
-
-<!-- ============ HEADER ============ -->
-<header class="hdr" data-hdr>
-  <div class="hdr__bar">
-    <a href="/" class="hdr__logo" aria-label="Gastro Einkaufsgemeinschaft – Startseite">
-      <img src="/images/logo-white-280.webp" srcset="/images/logo-white-280.webp 280w, /images/logo-white.webp 440w" sizes="(max-width: 860px) 154px, 216px" alt="Gastro Einkaufsgemeinschaft" width="500" height="208">
-    </a>
-    <nav class="hdr__nav" aria-label="Hauptnavigation">
-      <a href="/#ueber-uns">Über uns</a>
-      <a href="/#vorteile">Vorteile</a>
-      <a href="/#leistungen">Leistungen</a>
-      <a href="/#kontakt">Kontakt</a>
-    </nav>
-    <a href="{{ site.funnel }}" class="btn btn--orange btn--sm hdr__cta">Potenzialanalyse <span class="btn__arrow" aria-hidden="true">→</span></a>
-    <button class="hdr__burger" aria-label="Menü öffnen" aria-expanded="false" data-burger><span></span><span></span></button>
-  </div>
-</header>
-
-<div class="mnav" data-mnav aria-hidden="true">
-  <nav aria-label="Mobile Navigation">
-    <a href="/#ueber-uns"><small>01</small>Über uns</a>
-    <a href="/#vorteile"><small>02</small>Vorteile</a>
-    <a href="/#leistungen"><small>03</small>Leistungen</a>
-    <a href="/#kontakt"><small>04</small>Kontakt</a>
-  </nav>
-  <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren</a>
-  <a href="tel:{{ site.phone }}" class="mnav__tel">{{ site.phoneLabel }}</a>
-</div>
-
-<main id="content">
-
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
   <div class="hero__media" aria-hidden="true">
@@ -73,7 +28,7 @@ title: "Gastro Einkaufsgemeinschaft – Ihr starker Partner für den Gastronomie
       <p>Mit unserer Einkaufsgemeinschaft sparen Sie garantiert 5&nbsp;Prozent. Sie profitieren von hohen Rückvergütungen ohne versteckte Gebühren, wodurch Sie gleichzeitig Geld sparen und wertvolle Zeit für Ihren Betrieb gewinnen.</p>
     </div>
     <div class="hero__actions" data-rise style="--d:.28s">
-      <a href="/#vorteile" class="btn btn--orange">Mitglied werden <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a href="/#kontakt" class="btn btn--orange">Mitglied werden <span class="btn__arrow" aria-hidden="true">→</span></a>
       <a href="/#vorteile" class="btn btn--ghost">Mehr Infos</a>
     </div>
   </div>
@@ -302,67 +257,4 @@ title: "Gastro Einkaufsgemeinschaft – Ihr starker Partner für den Gastronomie
   </div>
 </section>
 
-<!-- ============ KONTAKT ============ -->
-<section class="contact" id="kontakt">
-  <div class="wrap contact__grid">
-    <div class="contact__info" data-reveal>
-      <p class="eyebrow"><span class="dot"></span>Kontakt</p>
-      <h2 class="h2 h2--xl">Gastro Einkaufs&shy;gemeinschaft</h2>
-      <address>
-        Osterhofener Str. 12<br>
-        93055 Regensburg
-      </address>
-      <a href="tel:{{ site.phone }}" class="contact__tel">{{ site.phoneLabel }}</a>
-      <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren <span class="btn__arrow" aria-hidden="true">→</span></a>
-    </div>
-
-    <form class="form" data-form data-reveal style="--d:.1s" novalidate>
-      <div class="field field--full"><input id="f-firma" name="firma" placeholder=" " autocomplete="organization"><label for="f-firma">Firma</label></div>
-      <div class="field"><input id="f-vn" name="vorname" placeholder=" " autocomplete="given-name"><label for="f-vn">Vorname</label></div>
-      <div class="field"><input id="f-nn" name="nachname" placeholder=" " autocomplete="family-name"><label for="f-nn">Nachname</label></div>
-      <div class="field"><input id="f-tel" name="telefon" type="tel" placeholder=" " autocomplete="tel"><label for="f-tel">Telefon</label></div>
-      <div class="field"><input id="f-mail" name="email" type="email" placeholder=" " autocomplete="email" required><label for="f-mail">E-Mail</label></div>
-      <div class="field field--full"><textarea id="f-msg" name="anliegen" rows="4" placeholder=" "></textarea><label for="f-msg">Ihr Anliegen</label></div>
-      <button type="submit" class="btn btn--green form__submit">Formular absenden <span class="btn__arrow" aria-hidden="true">→</span></button>
-      <p class="form__ok" data-form-ok hidden>Vielen Dank! Wir melden uns in Kürze bei Ihnen.</p>
-    </form>
-  </div>
-</section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="ftr">
-  <div class="wrap">
-    <div class="ftr__top">
-      <a href="/" class="ftr__logo"><img src="/images/logo-white.webp" alt="Gastro Einkaufsgemeinschaft" width="500" height="208" loading="lazy"></a>
-      <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren <span class="btn__arrow" aria-hidden="true">→</span></a>
-    </div>
-    <div class="ftr__mid">
-      <div>
-        <p class="ftr__h">Gastro Einkaufsgemeinschaft</p>
-        <p>Osterhofener Str. 12<br>93055 Regensburg</p>
-      </div>
-      <div>
-        <a href="tel:{{ site.phone }}" class="ftr__tel">{{ site.phoneLabel }}</a>
-      </div>
-      <nav class="ftr__nav" aria-label="Footer">
-        <a href="/#ueber-uns">Über uns</a>
-        <a href="/#vorteile">Vorteile</a>
-        <a href="/#leistungen">Leistungen</a>
-        <a href="/#kontakt">Kontakt</a>
-      </nav>
-    </div>
-    <div class="ftr__bottom">
-      <div class="ftr__legal">
-        <a href="https://gastro-einkaufsgemeinschaft.de/impressum">Impressum</a>
-        <a href="https://gastro-einkaufsgemeinschaft.de/datenschutz">Datenschutz</a>
-      </div>
-      <a href="http://www.aranes.de" class="ftr__credit">Webdesign by ARANES GmbH &amp; Co. KG</a>
-    </div>
-  </div>
-</footer>
-
-<script>{% inlineJs "src/js/main.js" %}</script>
-</body>
-</html>
+{% include "contact.njk" %}

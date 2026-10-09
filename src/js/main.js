@@ -59,33 +59,35 @@
 
   /* ---------- Vorteile: gepinnte Sektion, Scrollweg schaltet Schritte um ---------- */
   const advPin = $("[data-adv-pin]");
-  const advImgs = $$("[data-adv-img]");
-  const advNum = $("[data-adv-num]");
-  const advSteps = $$("[data-adv-step]");
-  const advDots = $$("[data-adv-go]");
-  let advIdx = -1;
-  const advSet = (i) => {
-    if (i === advIdx) return;
-    advIdx = i;
-    advSteps.forEach((s, n) => s.classList.toggle("is-active", n === i));
-    advImgs.forEach((img) => img.classList.toggle("is-active", +img.dataset.advImg === i));
-    advDots.forEach((d, n) => d.classList.toggle("is-active", n === i));
-    advNum.textContent = String(i + 1).padStart(2, "0");
-  };
-  const advRange = () => advPin.offsetHeight - innerHeight;
-  const advTop = () => advPin.getBoundingClientRect().top + scrollY;
-  const advUpdate = () => {
-    const range = advRange();
-    if (range <= 0) return advSet(0);
-    const p = (scrollY - advTop()) / range;
-    advSet(Math.max(0, Math.min(advSteps.length - 1, Math.floor(p * advSteps.length))));
-  };
-  addEventListener("scroll", advUpdate, { passive: true });
-  addEventListener("resize", advUpdate);
-  advUpdate();
-  advDots.forEach((d, n) => d.addEventListener("click", () => {
-    scrollTo({ top: advTop() + advRange() * (n + 0.5) / advSteps.length, behavior: "smooth" });
-  }));
+  if (advPin) {
+    const advImgs = $$("[data-adv-img]");
+    const advNum = $("[data-adv-num]");
+    const advSteps = $$("[data-adv-step]");
+    const advDots = $$("[data-adv-go]");
+    let advIdx = -1;
+    const advSet = (i) => {
+      if (i === advIdx) return;
+      advIdx = i;
+      advSteps.forEach((s, n) => s.classList.toggle("is-active", n === i));
+      advImgs.forEach((img) => img.classList.toggle("is-active", +img.dataset.advImg === i));
+      advDots.forEach((d, n) => d.classList.toggle("is-active", n === i));
+      advNum.textContent = String(i + 1).padStart(2, "0");
+    };
+    const advRange = () => advPin.offsetHeight - innerHeight;
+    const advTop = () => advPin.getBoundingClientRect().top + scrollY;
+    const advUpdate = () => {
+      const range = advRange();
+      if (range <= 0) return advSet(0);
+      const p = (scrollY - advTop()) / range;
+      advSet(Math.max(0, Math.min(advSteps.length - 1, Math.floor(p * advSteps.length))));
+    };
+    addEventListener("scroll", advUpdate, { passive: true });
+    addEventListener("resize", advUpdate);
+    advUpdate();
+    advDots.forEach((d, n) => d.addEventListener("click", () => {
+      scrollTo({ top: advTop() + advRange() * (n + 0.5) / advSteps.length, behavior: "smooth" });
+    }));
+  }
 
   /* ---------- Sortiment-Slider ---------- */
   const stage = $("[data-sort]");
@@ -197,15 +199,5 @@
       all.forEach((o) => { o.classList.remove("is-open"); $(".acc__btn", o).setAttribute("aria-expanded", "false"); });
       if (open) { item.classList.add("is-open"); $(".acc__btn", item).setAttribute("aria-expanded", "true"); }
     });
-  });
-
-  /* ---------- Formular (Entwurf: kein Versand) ---------- */
-  const form = $("[data-form]");
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const mail = $("#f-mail", form);
-    if (!mail.value || !mail.checkValidity()) { mail.focus(); return; }
-    $("[data-form-ok]", form).hidden = false;
-    form.reset();
   });
 })();
