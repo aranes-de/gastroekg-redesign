@@ -16,8 +16,8 @@
 # wird per Symlink (ln -sfn ist atomar); die letzten Releases bleiben liegen,
 # ein Rueckzug ist ein einzelner Befehl auf dem Server.
 #
-# Nach dem Muster von optware/bin/deploy.sh, aber ohne cms5-Teile (Formular,
-# News-Shell, nginx-Regeln) - die kommen mit dem jeweiligen Modul dazu.
+# Nach dem Muster von optware/bin/deploy.sh. Von den cms5-Teilen ist nur der
+# Formular-Proxy dabei (deploy/nginx/); News-Shell kommt mit dem Modul dazu.
 #
 set -euo pipefail
 
@@ -105,6 +105,12 @@ echo "==> Upload nach $SSH_HOST:$REMOTE_RELEASE"
 ssh "$SSH_HOST" "mkdir -p '$REMOTE_RELEASE'"
 rsync -az --delete _site/ "$SSH_HOST:$REMOTE_RELEASE/"
 
+# Die nginx-Regeln gehoeren zum Release: Der server-Block auf dem Server bindet
+# current/deploy/nginx/*.conf ein. Mit dem Umschalten wechseln also auch die
+# Regeln - und ein Rueckzug nimmt die vorigen mit.
+ssh "$SSH_HOST" "mkdir -p '$REMOTE_RELEASE/deploy'"
+rsync -az --delete deploy/nginx/ "$SSH_HOST:$REMOTE_RELEASE/deploy/nginx/"
+
 # Umschalten. Ist $DOCROOT noch ein echtes Verzeichnis, wird es einmalig durch
 # den Symlink ersetzt; danach ist jeder Wechsel ein atomares ln -sfn.
 echo "==> Umschalten: $DOCROOT -> releases/$RELEASE"
@@ -120,6 +126,16 @@ ssh "$SSH_HOST" "
     ln -sfn 'releases/$RELEASE' '$DOCROOT'
   fi
 "
+
+# nginx pruefen und neu laden, damit die Regeln aus deploy/nginx/ wirken. Kein
+# Abbruch bei Fehler: Die Seite ist umgeschaltet, nginx laeuft mit der bisherigen
+# Konfiguration weiter - ein Abbruch wuerde nichts retten.
+echo "==> nginx pruefen und neu laden"
+if ssh "$SSH_HOST" "sudo -n /usr/sbin/nginx -t && sudo -n /usr/bin/systemctl reload nginx"; then
+  :
+else
+  echo "    WARNUNG: nginx nicht neu geladen - die Regeln aus deploy/nginx/ wirken erst nach 'nginx -t && systemctl reload nginx' von Hand." >&2
+fi
 
 echo "==> Alte Releases aufraeumen (behalte $KEEP)"
 ssh "$SSH_HOST" "cd '$BASE/releases' && ls -1dt */ 2>/dev/null | tail -n +\$(( $KEEP + 1 )) | xargs -r rm -rf"
