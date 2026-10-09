@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "npx @11ty/eleventy",
+    "build:dev": "GASTROEKG_FORMS_BASE=http://aracms5.localhost npx @11ty/eleventy",
     "dev": "npx @11ty/eleventy --serve"
   },
   "dependencies": {
