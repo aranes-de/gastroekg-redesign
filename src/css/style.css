@@ -184,8 +184,15 @@ address { font-style: normal; }
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%;
   animation: heroZoom 14s ease-in-out infinite alternate;
 }
-.hero__img--b { opacity: 0; animation: heroFade 14s infinite, heroZoom 14s ease-in-out infinite alternate; }
-@keyframes heroFade { 0%{opacity:0} 44%{opacity:0} 50%{opacity:1} 94%{opacity:1} 100%{opacity:0} }
+/* Vier Hero-Motive als Überblendung: Bild 1 liegt dauerhaft unten, 2 bis 4
+   blenden nacheinander darüber ein (je 7 s), danach wieder von vorn. */
+.hero__img--basket, .hero__img--chef { object-position: 20% 30%; }
+.hero__img--b { opacity: 0; animation: heroFadeB 28s infinite, heroZoom 14s ease-in-out infinite alternate; }
+.hero__img--c { opacity: 0; animation: heroFadeC 28s infinite, heroZoom 14s ease-in-out infinite alternate; }
+.hero__img--d { opacity: 0; animation: heroFadeD 28s infinite, heroZoom 14s ease-in-out infinite alternate; }
+@keyframes heroFadeB { 0%{opacity:0} 22%{opacity:0} 27%{opacity:1} 52%{opacity:1} 57%{opacity:0} 100%{opacity:0} }
+@keyframes heroFadeC { 0%{opacity:0} 47%{opacity:0} 52%{opacity:1} 77%{opacity:1} 82%{opacity:0} 100%{opacity:0} }
+@keyframes heroFadeD { 0%{opacity:0} 72%{opacity:0} 77%{opacity:1} 95%{opacity:1} 100%{opacity:0} }
 @keyframes heroZoom { from{transform:scale(1)} to{transform:scale(1.08)} }
 .hero__shade {
   background:
