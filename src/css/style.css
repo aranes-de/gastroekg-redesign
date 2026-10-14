@@ -596,6 +596,11 @@ a.ref__way--main:hover { background: #ffb526; }
 .ref__note { max-width: 720px; margin-top: clamp(28px, 4vw, 44px); font-size: 15px; color: var(--muted); }
 .ref__note a { color: var(--orange-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
+.ref-cta { padding: 0 0 clamp(70px, 9vw, 130px); }
+.ref-cta__box { display: grid; justify-items: start; gap: 18px; padding: clamp(30px, 4.5vw, 64px); border-radius: var(--r-lg); background: var(--ink); color: rgba(255,253,249,.8); }
+.ref-cta__box .h2 { color: var(--white); }
+.ref-cta__box p { max-width: 52ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.45; }
+
 @media (max-width: 1080px) {
   .ref__ways { grid-template-columns: repeat(2, 1fr); }
 }
