@@ -94,7 +94,7 @@ echo "==> Build (npm run build)"
 npm run build
 
 # Nachkontrolle am Ergebnis, nicht an der Absicht.
-for DATEI in index.html impressum/index.html datenschutz/index.html; do
+for DATEI in index.html impressum/index.html datenschutz/index.html kunden-werben-kunden/index.html; do
   if [ ! -f "_site/$DATEI" ]; then
     echo "FEHLER: _site/$DATEI fehlt - breche ab, ohne etwas hochzuladen." >&2
     exit 1

@@ -563,6 +563,47 @@ address { font-style: normal; }
 .legal__body a:hover { color: var(--ink); text-decoration-color: var(--orange); }
 
 /* ==========================================================================
+   KUNDEN WERBEN KUNDEN
+   ========================================================================== */
+.page__lead { max-width: 640px; margin-top: 26px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.55; color: rgba(255,253,249,.82); }
+.page__lead strong { color: var(--white); }
+.page__actions { margin-top: 34px; }
+
+.ref { padding: clamp(60px, 8vw, 120px) 0 clamp(40px, 6vw, 90px); }
+.ref__bonus { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 2vw, 24px); margin-bottom: clamp(70px, 9vw, 130px); }
+.ref__bonus-item { display: grid; gap: 10px; padding: clamp(26px, 3vw, 42px); border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--line); }
+.ref__bonus-item:last-child { background: var(--ink); color: rgba(255,253,249,.8); }
+.ref__bonus-num { font-size: clamp(44px, 6vw, 84px); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--orange-ink); }
+.ref__bonus-item:last-child .ref__bonus-num { color: var(--green); }
+.ref__bonus-label { max-width: 26ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.45; }
+
+.ref__head { margin-bottom: clamp(28px, 4vw, 48px); }
+.ref__head .h2 { max-width: 18ch; }
+.ref__steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 24px); margin: 0 0 clamp(70px, 9vw, 130px); padding: 0; }
+.ref__step { padding: clamp(24px, 2.6vw, 36px); border: 1px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+.ref__step h3 { font-size: clamp(20px, 1.8vw, 26px); margin: 18px 0 10px; }
+.ref__no { font-size: 14px; font-weight: 700; color: var(--orange-ink); }
+
+.ref__ways { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 24px); }
+.ref__way { display: flex; flex-direction: column; gap: 10px; padding: clamp(24px, 2.6vw, 34px); border-radius: var(--r-md); background: var(--white); border: 1px solid var(--line); color: var(--text); transition: transform .35s var(--ease), background .2s; }
+a.ref__way:hover { transform: translateY(-4px); border-color: var(--orange); }
+.ref__way h3 { font-size: clamp(18px, 1.5vw, 22px); color: var(--ink); overflow-wrap: anywhere; }
+.ref__way-k { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.ref__way-go { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--ink); }
+.ref__way--main { background: var(--orange); border-color: var(--orange); color: var(--ink-3); }
+a.ref__way--main:hover { background: #ffb526; }
+.ref__way--main .ref__way-k { color: var(--ink-3); }
+.ref__note { max-width: 720px; margin-top: clamp(28px, 4vw, 44px); font-size: 15px; color: var(--muted); }
+.ref__note a { color: var(--orange-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 1080px) {
+  .ref__ways { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .ref__bonus, .ref__steps, .ref__ways { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
    Reveal-Animationen
    ========================================================================== */
 [data-rise] { animation: rise .9s var(--ease) backwards; animation-delay: var(--d, 0s); }

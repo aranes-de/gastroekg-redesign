@@ -192,6 +192,19 @@
   $$("[data-vplayer]").forEach(bindPlayer);
   $$("[data-reel]").forEach(bindPlayer);
 
+  /* ---------- Kunden werben Kunden: Kundennummer (?r=) weiterreichen ---------- */
+  const ref = (new URLSearchParams(location.search).get("r") || "").replace(/\D/g, "").slice(0, 8);
+  $$("[data-ref-link]").forEach((a) => {
+    if (!ref) return;
+    const u = new URL(a.href);
+    u.searchParams.set("r", ref);
+    a.href = u.toString();
+  });
+  $$("[data-ref-mail]").forEach((a) => {
+    const body = "Name des Betriebs:\nAnsprechpartner:\nTelefon:\nOrt:\n\nMeine Kundennummer: " + ref + "\nMein Name:\n\nDer empfohlene Betrieb ist mit einem Anruf einverstanden.";
+    a.href = a.href.split("?")[0] + "?subject=" + encodeURIComponent("Empfehlung: Kunden werben Kunden") + "&body=" + encodeURIComponent(body);
+  });
+
   /* ---------- Accordion ---------- */
   $$("[data-acc] .acc").forEach((item, _, all) => {
     $(".acc__btn", item).addEventListener("click", () => {
