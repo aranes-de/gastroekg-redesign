@@ -538,6 +538,17 @@ address { font-style: normal; }
     radial-gradient(60% 80% at 100% 0%, rgba(247,167,18,.22), transparent 70%),
     radial-gradient(40% 60% at 0% 100%, rgba(134,188,36,.14), transparent 70%);
 }
+/* Seitenkopf mit Hintergrundfoto (Kunden werben Kunden): Motiv rechts,
+   Text links; ein Verlauf hält die linke Hälfte dunkel genug für den Text. */
+.page__media { position: absolute; inset: 0; z-index: -2; }
+.page__media img { width: 100%; height: 100%; object-fit: cover; object-position: 100% 50%; }
+.page--img { min-height: clamp(560px, 50vw, 820px); display: flex; flex-direction: column; justify-content: center; }
+.page--img::before {
+  background:
+    linear-gradient(90deg, rgba(21,18,14,.97) 0%, rgba(21,18,14,.82) 36%, rgba(21,18,14,.15) 66%, rgba(21,18,14,0) 85%),
+    linear-gradient(0deg, rgba(21,18,14,.85) 0%, rgba(21,18,14,0) 35%),
+    linear-gradient(180deg, rgba(21,18,14,.7) 0%, rgba(21,18,14,0) 28%);
+}
 .page__title {
   color: var(--white); font-size: clamp(42px, 7vw, 104px);
   letter-spacing: -.04em; line-height: .95; max-width: 14ch;
@@ -561,6 +572,104 @@ address { font-style: normal; }
   transition: color .2s, text-decoration-color .2s;
 }
 .legal__body a:hover { color: var(--ink); text-decoration-color: var(--orange); }
+
+/* ==========================================================================
+   KUNDEN WERBEN KUNDEN
+   ========================================================================== */
+.page__lead { max-width: 640px; margin-top: 26px; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.55; color: rgba(255,253,249,.82); }
+.page__lead strong { color: var(--white); }
+.page__actions { margin-top: 34px; }
+
+.ref { padding: clamp(60px, 8vw, 120px) 0 clamp(40px, 6vw, 90px); }
+.ref__bonus { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 2vw, 24px); margin-bottom: clamp(70px, 9vw, 130px); }
+.ref__bonus-item { display: grid; gap: 10px; padding: clamp(26px, 3vw, 42px); border-radius: var(--r-lg); background: var(--white); border: 1px solid var(--line); }
+.ref__bonus-item:last-child { background: var(--ink); color: rgba(255,253,249,.8); }
+.ref__bonus-num { font-size: clamp(44px, 6vw, 84px); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--orange-ink); }
+.ref__bonus-item:last-child .ref__bonus-num { color: var(--green); }
+.ref__bonus-label { max-width: 26ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.45; }
+
+.ref__head { margin-bottom: clamp(28px, 4vw, 48px); }
+.ref__head .h2 { max-width: 18ch; }
+.ref__steps { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 24px); margin: 0 0 clamp(70px, 9vw, 130px); padding: 0; }
+.ref__step { padding: clamp(24px, 2.6vw, 36px); border: 1px solid var(--line); border-radius: var(--r-md); background: var(--white); }
+.ref__step h3 { font-size: clamp(20px, 1.8vw, 26px); margin: 18px 0 10px; }
+.ref__no { font-size: 14px; font-weight: 700; color: var(--orange-ink); }
+
+/* Wege zum Kontakt: dunkles Panel wie der Kontaktbereich der Startseite,
+   darin vier Kacheln mit Icon. Die Online-Kachel ist der Hauptweg und orange. */
+.ref__panel {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: clamp(32px, 5vw, 72px); border-radius: var(--r-lg);
+  background: var(--ink); color: rgba(255,253,249,.78);
+}
+.ref__panel::before {
+  content: ""; position: absolute; z-index: -1; width: 760px; height: 760px; right: -360px; top: -440px;
+  border-radius: 50%; border: 2px solid rgba(134,188,36,.35);
+  border-color: transparent transparent rgba(134,188,36,.4) rgba(134,188,36,.4); transform: rotate(-10deg);
+}
+.ref__panel::after {
+  content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+  background: radial-gradient(50% 60% at 0% 100%, rgba(247,167,18,.16), transparent 70%);
+}
+.ref__head--light .h2 { color: var(--white); }
+.ref__ways { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+@media (max-width: 1200px) { .ref__ways { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ref__way {
+  display: flex; flex-direction: column; gap: 12px; padding: clamp(24px, 2.4vw, 32px);
+  border-radius: var(--r-md); background: rgba(255,253,249,.05); border: 1px solid rgba(255,253,249,.12);
+  color: rgba(255,253,249,.72); transition: transform .35s var(--ease), background .25s, border-color .25s;
+}
+a.ref__way:hover { transform: translateY(-5px); background: rgba(255,253,249,.09); border-color: var(--orange); }
+.ref__way-icon {
+  display: grid; place-items: center; width: 60px; height: 60px; margin-bottom: 6px; border-radius: 50%;
+  background: rgba(134,188,36,.16); color: var(--green);
+}
+.ref__way-icon svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ref__way-k { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); }
+.ref__way h3 { font-size: clamp(20px, 1.7vw, 26px); color: var(--white); overflow-wrap: anywhere; line-height: 1.12; }
+/* E-Mail und Telefonnummer: etwas kleiner, Umbruch nur an den <wbr>-Stellen */
+.ref__way-h--contact { font-size: clamp(18px, 1.45vw, 22px); letter-spacing: -.01em; overflow-wrap: normal; word-break: normal; }
+.ref__way p { font-size: 15px; line-height: 1.55; }
+.ref__way-go {
+  display: inline-flex; align-items: center; gap: 10px; width: fit-content; margin-top: auto; white-space: nowrap;
+  padding: 9px 12px 9px 18px; border-radius: 999px; border: 1px solid rgba(255,253,249,.3);
+  font-weight: 700; font-size: 15px; color: var(--white); transition: background .25s, color .25s, border-color .25s;
+}
+.ref__way-go .btn__arrow { margin-right: 0; background: rgba(255,253,249,.14); }
+a.ref__way:hover .ref__way-go { background: var(--white); color: var(--ink); border-color: var(--white); }
+a.ref__way:hover .ref__way-go .btn__arrow { background: rgba(21,18,14,.1); transform: translateX(4px); }
+.ref__way--main { background: var(--orange); border-color: var(--orange); color: var(--ink-3); box-shadow: 0 24px 50px -24px rgba(247,167,18,.8); }
+a.ref__way--main:hover { background: #ffb526; border-color: #ffb526; }
+.ref__way--main .ref__way-icon { background: var(--ink); color: var(--orange); }
+.ref__way--main .ref__way-k, .ref__way--main h3 { color: var(--ink); }
+.ref__way--main .ref__way-go { color: var(--ink); border-color: rgba(21,18,14,.35); }
+.ref__way--main .ref__way-go .btn__arrow { background: rgba(21,18,14,.12); }
+a.ref__way--main:hover .ref__way-go { background: var(--ink); color: var(--white); border-color: var(--ink); }
+a.ref__way--main:hover .ref__way-go .btn__arrow { background: rgba(255,253,249,.18); }
+.ref__note { max-width: 720px; margin-top: clamp(24px, 3vw, 36px); font-size: 14px; color: rgba(255,253,249,.55); }
+.ref__note a { color: var(--orange); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+.ref-cta { padding: 0 0 clamp(70px, 9vw, 130px); }
+/* Abschluss-Kasten mit freigestelltem Porträt: sitzt rechts auf der Unterkante
+   und ragt oben aus dem Kasten heraus. Der rechte Innenabstand hält den Text frei. */
+.ref-cta__box {
+  position: relative; display: grid; justify-items: start; gap: 18px;
+  padding: clamp(30px, 4.5vw, 64px); padding-right: clamp(260px, 34%, 460px);
+  margin-top: 60px; border-radius: var(--r-lg); background: var(--navy); color: rgba(255,253,249,.8);
+}
+.ref-cta__img {
+  position: absolute; right: clamp(16px, 4vw, 64px); bottom: 0;
+  height: calc(100% + 60px); width: auto; max-width: none;
+  border-bottom-left-radius: 0; filter: drop-shadow(0 20px 30px rgba(0,0,0,.35));
+}
+.ref-cta__box .h2 { color: var(--white); }
+.ref-cta__box p { max-width: 52ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.45; }
+
+@media (max-width: 1080px) {
+}
+@media (max-width: 860px) {
+  .ref__bonus, .ref__steps, .ref__ways { grid-template-columns: 1fr; }
+}
 
 /* ==========================================================================
    Reveal-Animationen
@@ -610,6 +719,14 @@ address { font-style: normal; }
 
   .voices, .contact { margin: 0 6px; }
   .page { margin: 6px 6px 0; }
+  .ref-cta__box { padding-right: clamp(30px, 4.5vw, 64px); margin-top: 0; }
+  .ref-cta__img { display: none; }
+  .page--img { min-height: 0; padding-bottom: 72vw; justify-content: flex-start; }
+  .page__media img { object-position: 50% 100%; }
+  .page--img::before {
+    background:
+      linear-gradient(180deg, rgba(21,18,14,.97) 0%, rgba(21,18,14,.9) 40%, rgba(21,18,14,.3) 58%, rgba(21,18,14,0) 72%);
+  }
   .voices__grid { grid-template-columns: repeat(2, 1fr); }
 
   .serv__img { position: relative; top: 0; aspect-ratio: 16/10; order: -1; }

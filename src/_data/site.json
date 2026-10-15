@@ -9,5 +9,9 @@
   },
   "kontakt": {
     "endpoint": "/api/gastroekg/forms/kontakt"
+  },
+  "empfehlung": {
+    "funnel": "https://gastroekg.convertive.app/empfehlen",
+    "email": "info@gastro-einkaufsgemeinschaft.de"
   }
 }

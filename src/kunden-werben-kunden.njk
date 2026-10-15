@@ -1,0 +1,120 @@
+---
+layout: base.njk
+title: "Kunden werben Kunden – Gastro Einkaufsgemeinschaft"
+description: "Empfehlen Sie die Gastro Einkaufsgemeinschaft weiter: bis zu 500 € Prämie je neuem Mitglied. Kontakt online, per E-Mail oder Telefon mitteilen."
+---
+{# ─────────────────────────────────────────────────────────────────────────
+   Werber-Seite. Der Link aus der Textvorlage hängt die Kundennummer an
+   (?r=12345); src/js/main.js reicht sie an den Empfehlungs-Funnel und den
+   E-Mail-Entwurf weiter (data-ref-link / data-ref-mail). Funnel-URL und
+   E-Mail-Adresse: src/_data/site.json (empfehlung).
+   ───────────────────────────────────────────────────────────────────────── #}
+
+<!-- ============ SEITENKOPF ============ -->
+<section class="page page--img" id="top">
+  <div class="page__media" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 860px)" srcset="/images/kwk/hero-m.webp">
+      <img src="/images/kwk/hero-1700.webp" srcset="/images/kwk/hero-1200.webp 1200w, /images/kwk/hero-1700.webp 1700w, /images/kwk/hero-2200.webp 2200w" sizes="100vw" alt="" width="2200" height="988" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light" data-rise><span class="dot"></span>Kunden werben Kunden</p>
+    <h1 class="page__title" data-rise style="--d:.08s">Empfehlen lohnt sich.</h1>
+    <p class="page__lead" data-rise style="--d:.18s">Sie kennen einen Betrieb, der beim Einkauf zu viel bezahlt? Sagen Sie uns, wen wir ansprechen dürfen – für jede erfolgreiche Empfehlung gibt es <strong>bis zu 500&nbsp;€ Prämie</strong>.</p>
+    <div class="page__actions" data-rise style="--d:.28s">
+      <a href="{{ site.empfehlung.funnel }}" class="btn btn--orange" data-ref-link>Kontakt jetzt mitteilen <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRÄMIE ============ -->
+<section class="ref">
+  <div class="wrap">
+    <div class="ref__bonus" data-reveal>
+      <div class="ref__bonus-item">
+        <span class="ref__bonus-num">250&nbsp;€</span>
+        <span class="ref__bonus-label">wenn sich der empfohlene Betrieb als Mitglied registriert</span>
+      </div>
+      <div class="ref__bonus-item">
+        <span class="ref__bonus-num">+&nbsp;250&nbsp;€</span>
+        <span class="ref__bonus-label">wenn das neue Mitglied mindestens zwölf Monate dabei bleibt</span>
+      </div>
+    </div>
+
+    <!-- ============ SO GEHT'S ============ -->
+    <div class="ref__head" data-reveal>
+      <p class="eyebrow"><span class="dot"></span>So einfach geht's</p>
+      <h2 class="h2">In drei Schritten zur <span class="hl-green">Prämie</span></h2>
+    </div>
+    <ol class="ref__steps">
+      <li class="ref__step" data-reveal>
+        <span class="ref__no">01</span>
+        <h3>Kontakt mitteilen</h3>
+        <p>Nennen Sie uns den Betrieb und einen Ansprechpartner – online, per E-Mail oder am Telefon. Geben Sie bitte Ihre Kundennummer an, damit wir die Prämie zuordnen können.</p>
+      </li>
+      <li class="ref__step" data-reveal style="--d:.08s">
+        <span class="ref__no">02</span>
+        <h3>Wir melden uns</h3>
+        <p>Unser Team ruft den empfohlenen Betrieb an und zeigt in einer kostenfreien Potenzialanalyse, wie viel er beim Einkauf sparen kann.</p>
+      </li>
+      <li class="ref__step" data-reveal style="--d:.16s">
+        <span class="ref__no">03</span>
+        <h3>Prämie erhalten</h3>
+        <p>Wird der Betrieb Mitglied, erhalten Sie 250&nbsp;€. Bleibt er mindestens zwölf Monate, legen wir weitere 250&nbsp;€ drauf.</p>
+      </li>
+    </ol>
+
+    <!-- ============ WEGE ============ -->
+    <div class="ref__panel" data-reveal>
+      <div class="ref__head ref__head--light">
+        <p class="eyebrow eyebrow--light"><span class="dot"></span>Ihr Weg zu uns</p>
+        <h2 class="h2">So teilen Sie uns den Kontakt mit</h2>
+      </div>
+      <div class="ref__ways">
+        <a href="{{ site.empfehlung.funnel }}" class="ref__way ref__way--main" data-ref-link>
+          <span class="ref__way-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span class="ref__way-k">Online</span>
+          <h3>Empfehlungs&shy;formular</h3>
+          <p>Betrieb, Ansprechpartner und Telefonnummer eintragen – in zwei Minuten erledigt.</p>
+          <span class="ref__way-go">Formular öffnen <span class="btn__arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a href="mailto:{{ site.empfehlung.email }}" class="ref__way" data-ref-mail>
+          <span class="ref__way-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+          <span class="ref__way-k">E-Mail</span>
+          <h3 class="ref__way-h--contact">{{ site.empfehlung.email | replace("@", "@<wbr>") | replace("einkaufsgemeinschaft", "einkaufs<wbr>gemeinschaft") | safe }}</h3>
+          <p>Schreiben Sie uns Name des Betriebs, Ansprechpartner, Telefon und Ihre Kundennummer.</p>
+          <span class="ref__way-go">E-Mail schreiben <span class="btn__arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a href="tel:{{ site.phone }}" class="ref__way">
+          <span class="ref__way-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h3l1.6 4-2 1.3a11 11 0 0 0 6 6l1.3-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7 2 2 0 0 1 6.6 3.5z"/></svg></span>
+          <span class="ref__way-k">Telefon</span>
+          <h3 class="ref__way-h--contact">{{ site.phoneLabel | replace(" 954 ", "&nbsp;954&nbsp;") | safe }}</h3>
+          <p>Rufen Sie uns an – wir nehmen die Empfehlung direkt auf.</p>
+          <span class="ref__way-go">Jetzt anrufen <span class="btn__arrow" aria-hidden="true">→</span></span>
+        </a>
+        <div class="ref__way">
+          <span class="ref__way-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span>
+          <span class="ref__way-k">Persönlich</span>
+          <h3>Bei Ihrem Ansprech&shy;partner</h3>
+          <p>Sprechen Sie Ihren Ansprechpartner bei uns einfach beim nächsten Kontakt an.</p>
+        </div>
+      </div>
+      <p class="ref__note">Bitte empfehlen Sie nur Betriebe, deren Ansprechpartner mit einem Anruf von uns einverstanden ist. Hinweise zum Umgang mit den Daten finden Sie in unserer <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABSCHLUSS ============ -->
+{# Kein cms5-Kontaktformular: Empfehlungen laufen über den Funnel, der sie
+   direkt ins CRM überträgt und benachrichtigt. #}
+<section class="ref-cta">
+  <div class="wrap">
+    <div class="ref-cta__box" data-reveal>
+      <img class="ref-cta__img" src="/images/kwk/kossak-520.webp" srcset="/images/kwk/kossak-520.webp 433w, /images/kwk/kossak-900.webp 749w" sizes="(max-width: 860px) 220px, 380px" alt="" width="749" height="900" loading="lazy" decoding="async">
+      <h2 class="h2">Wen dürfen wir ansprechen?</h2>
+      <p>Betrieb, Ansprechpartner und Telefonnummer – mehr brauchen wir nicht.</p>
+      <a href="{{ site.empfehlung.funnel }}" class="btn btn--orange" data-ref-link>Kontakt jetzt mitteilen <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
