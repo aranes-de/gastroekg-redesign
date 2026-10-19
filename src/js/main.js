@@ -19,9 +19,12 @@
     burger.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
     mnav.setAttribute("aria-hidden", !open);
   };
-  burger.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
-  $$("a", mnav).forEach((a) => a.addEventListener("click", () => setMenu(false)));
-  addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
+  // Landingpages (minimalNav) haben kein Menü
+  if (burger) {
+    burger.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+    $$("a", mnav).forEach((a) => a.addEventListener("click", () => setMenu(false)));
+    addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
+  }
 
   /* ---------- Aktiver Nav-Punkt ---------- */
   const navLinks = $$(".hdr__nav a");

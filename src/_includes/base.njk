@@ -24,6 +24,7 @@
     <a href="/" class="hdr__logo" aria-label="Gastro Einkaufsgemeinschaft – Startseite">
       <img src="/images/logo-white-280.webp" srcset="/images/logo-white-280.webp 280w, /images/logo-white.webp 440w" sizes="(max-width: 860px) 154px, 216px" alt="Gastro Einkaufsgemeinschaft" width="500" height="208">
     </a>
+{% if not minimalNav %}
     <nav class="hdr__nav" aria-label="Hauptnavigation">
       <a href="/#ueber-uns">Über uns</a>
       <a href="/#vorteile">Vorteile</a>
@@ -32,9 +33,11 @@
     </nav>
     <a href="{{ site.funnel }}" class="btn btn--orange btn--sm hdr__cta">Potenzialanalyse <span class="btn__arrow" aria-hidden="true">→</span></a>
     <button class="hdr__burger" aria-label="Menü öffnen" aria-expanded="false" data-burger><span></span><span></span></button>
+{% endif %}
   </div>
 </header>
 
+{% if not minimalNav %}
 <div class="mnav" data-mnav aria-hidden="true">
   <nav aria-label="Mobile Navigation">
     <a href="/#ueber-uns"><small>01</small>Über uns</a>
@@ -45,6 +48,7 @@
   <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren</a>
   <a href="tel:{{ site.phone }}" class="mnav__tel">{{ site.phoneLabel }}</a>
 </div>
+{% endif %}
 
 <main id="content">
 {{ content | safe }}
@@ -55,7 +59,9 @@
   <div class="wrap">
     <div class="ftr__top">
       <a href="/" class="ftr__logo"><img src="/images/logo-white.webp" alt="Gastro Einkaufsgemeinschaft" width="500" height="208" loading="lazy"></a>
+{% if not minimalNav %}
       <a href="{{ site.funnel }}" class="btn btn--orange">Kostenfreie Potenzialanalyse vereinbaren <span class="btn__arrow" aria-hidden="true">→</span></a>
+{% endif %}
     </div>
     <div class="ftr__mid">
       <div>
